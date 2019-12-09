@@ -6,27 +6,36 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Yas', age: 44 },
-      { name: 'Gabriel', age: 33 },
-      { name: 'Ali', age: 20 }
+      { id: 'firstId', name: 'Gabriel', age: 33 },
+      { id: 'secondId', name: 'Yas', age: 44 },
+      { id: 'thirdId', name: 'Ali', age: 20 }
     ],
     someOtherState: 'OtherValue',
     showPersons: false
   };
 
-  nameChangeHandler = event => {
-    this.setState({
-      persons: [
-        { name: 'Yas', age: 44 },
-        { name: event.target.value, age: 33 },
-        { name: 'Ali', age: 20 }
-      ]
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     });
+
+    const person = { ...this.state.persons[personIndex] };
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+    this.setState({ persons: persons });
+    // this.setState({
+    //   persons: [
+    //     { name: 'Yas', age: 44 },
+    //     { name: event.target.value, age: 33 },
+    //     { name: 'Ali', age: 20 }
+    //   ]
+    // });
   };
 
   deletePersonHandler = personIndex => {
     // const persons = this.state.persons.slice();
-    const persons = [...this.state.persons]
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({ persons: persons });
   };
@@ -49,9 +58,11 @@ class App extends Component {
           {this.state.persons.map((person, index) => {
             return (
               <Person
+                click={() => this.deletePersonHandler(index)}
                 name={person.name}
                 age={person.age}
-                click={() => this.deletePersonHandler(index)}
+                key={person.id}
+                changed={event => this.nameChangeHandler(event, person.id)}
               />
             );
           })}
