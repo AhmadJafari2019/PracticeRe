@@ -24,13 +24,6 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
     this.setState({ persons: persons });
-    // this.setState({
-    //   persons: [
-    //     { name: 'Yas', age: 44 },
-    //     { name: event.target.value, age: 33 },
-    //     { name: 'Ali', age: 20 }
-    //   ]
-    // });
   };
 
   deletePersonHandler = personIndex => {
@@ -47,7 +40,9 @@ class App extends Component {
 
   render() {
     const style = {
-      border: '2px solid blue'
+      border: '2px solid blue',
+      backgroundColor: 'green',
+      color: '#fff'
     };
 
     let persons = null;
@@ -68,12 +63,21 @@ class App extends Component {
           })}
         </div>
       );
+      style.backgroundColor = 'red';
+    }
+
+    let classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
     }
 
     return (
       <div className="App">
         <h1>Hello React</h1>
-        <p>This is really Working!</p>
+        <p className={classes.join(' ')}>This is really Working!</p>
         <button onClick={this.togglePersonHandler} style={style}>
           Switch Me
         </button>
