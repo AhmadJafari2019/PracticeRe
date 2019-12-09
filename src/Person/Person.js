@@ -4,10 +4,9 @@ const person = props => {
   return (
     <div>
       <p>
-        I am {props.name} and I am {props.age}years old
+        I am {props.name} and I am {props.age} years old
       </p>
       <p>{props.children}</p>
-      <p>I added just for the testing.</p>
     </div>
   );
 };
