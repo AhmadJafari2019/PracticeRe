@@ -11,7 +11,6 @@ const person = props => {
         type="text"
         onChange={props.changed}
         value={props.name}
-        className="input"
       />
     </div>
   );
