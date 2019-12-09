@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
@@ -12,7 +12,7 @@ class App extends Component {
     someOtherState: 'OtherValue'
   };
 
-switchNameHandler = () => {
+  switchNameHandler = () => {
     // console.log('Was Clicked.');
     this.setState({
       persons: [
@@ -22,7 +22,7 @@ switchNameHandler = () => {
       ]
     });
   };
-  render(){
+  render() {
     return (
       <div className="App">
         <h1>Hello React</h1>
@@ -35,6 +35,7 @@ switchNameHandler = () => {
         <Person
           name={this.state.persons[1].name}
           age={this.state.persons[1].age}
+          click={this.switchNameHandler}
         >
           Hi i'm the Child!
         </Person>
@@ -45,7 +46,6 @@ switchNameHandler = () => {
       </div>
     );
   }
-  
-};
+}
 
 export default App;
