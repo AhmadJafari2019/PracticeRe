@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, { StyleRoot } from 'radium';
+// import styled from 'styled-components';
 import './Person/Person.css';
 import Person from './Person/Person';
 
@@ -84,19 +84,17 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hello React</h1>
-          <p className={classes.join(' ')}>This is really Working!</p>
-          <button onClick={this.togglePersonHandler} style={style}>
-            Switch Me
-          </button>
+      <div className="App">
+        <h1>Hello React</h1>
+        <p className={classes.join(' ')}>This is really Working!</p>
+        <button onClick={this.togglePersonHandler} style={style}>
+          Switch Me
+        </button>
 
-          {persons}
-        </div>
-      </StyleRoot>
+        {persons}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
