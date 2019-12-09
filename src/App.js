@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Person/Person.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -33,11 +34,14 @@ class App extends Component {
     });
   };
   render() {
+    const style = {
+      border: '2px solid blue'
+    };
     return (
       <div className="App">
         <h1>Hello React</h1>
         <p>This is really Working!</p>
-        <button onClick={() => this.switchNameHandler('Mortez')}>
+        <button onClick={() => this.switchNameHandler('Mortez')} style={style}>
           Switch Me
         </button>
         <Person
