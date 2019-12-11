@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import Cockpit from '../components/Cockpit/Cockpit';
-import './App.css';
-import '../components/Persons/Person/Person.css';
+import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
-
+import Cockpit from '../components/Cockpit/Cockpit';
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log(['[App.js] constructor']);
+  }
   state = {
     persons: [
       { id: 'firstId', name: 'Gabriel', age: 33 },
@@ -15,6 +17,17 @@ class App extends Component {
     showPersons: false
   };
 
+  static getDerivedStateFromProps = (props, state) => {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  };
+
+  componentWillMount = () => {
+    console.log('[App.js] ComponentWillMount');
+  };
+  componentDidMount = () => {
+    console.log('[App.js] ComponentDidMount');
+  };
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -40,21 +53,26 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App.js] render ');
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = <Persons
-            persons={this.state.persons}
-            clicked={this.deletePersonHandler}
-            changed={this.nameChangeHandler}/>  
+      persons = (
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangeHandler}
+        />
+      );
     }
 
     return (
-      <div className="App">
-        <Cockpit 
-        showPersons ={this.state.showPersons} 
-        persons={this.state.persons}
-        clicked ={this.togglePersonHandler}
+      <div className={classes.App}>
+        <Cockpit
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonHandler}
         />
         {persons}
       </div>
@@ -63,15 +81,3 @@ class App extends Component {
 }
 
 export default App;
-
-// {this.state.persons.map((person, index) => {
-//   return (
-//     <Person
-//       click={() => this.deletePersonHandler(index)}
-//       name={person.name}
-//       age={person.age}
-//       key={person.id}
-//       changed={event => this.nameChangeHandler(event, person.id)}
-//     />
-//   );
-// })}
