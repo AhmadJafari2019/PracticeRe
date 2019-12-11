@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import classes from './App.module.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+
+
 class App extends Component {
+  
   constructor(props) {
     super(props);
     console.log(['[App.js] constructor']);
   }
+
   state = {
     persons: [
       { id: 'firstId', name: 'Gabriel', age: 33 },
@@ -14,7 +18,8 @@ class App extends Component {
       { id: 'thirdId', name: 'Ali', age: 20 }
     ],
     someOtherState: 'OtherValue',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   };
 
   static getDerivedStateFromProps = (props, state) => {
@@ -79,12 +84,13 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
+        <button onClick ={()=> {this.setState({showCockpit: false})}}> Remove Cockpit</button>
+       {this.state.showCockpit ? <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonHandler}
-        />
+        /> : null } 
         {persons}
       </div>
     );
