@@ -37,22 +37,3 @@
     transform: rotate(360deg);
   }
 }
-
-.red {
-  color: #ff0000;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.button {
-  border: 2px solid black;
-  background-color: green;
-  color: #fff;
-}
-
-.button:hover {
-  background-color: lightgreen;
-  color: black;
-}
